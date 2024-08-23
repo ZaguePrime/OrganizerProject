@@ -6,40 +6,47 @@ from tkinter import filedialog as fd
 from tkinter import messagebox
 
 working_directory = ""
-file_formats = {
-    "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg", ".webp", ".heic", ".ico", ".img"],
-    "Audio": [".mp3", ".wav", ".aac", ".flac", ".ogg", ".m4a", ".wma"],
-    "Video": [".mp4", ".avi", ".mkv", ".mov", ".wmv", ".flv", ".webm"],
-    "Documents": [".txt", ".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".odt", ".ods", ".odp", ".rtf"],
-    "Compressed Files": [".zip", ".rar", ".tar", ".gz", ".7z", ".bz2", ".xz"],
-    "Executables": [".exe", ".bat", ".sh", ".msi", ".app"],
-    "Data Files": [".csv", ".json", ".xml", ".yaml", ".yml", ".sql", ".db", ".mdb", ".sqlite"],
-    "Web Files": [".html", ".htm", ".css", ".js", ".php", ".asp", ".jsp"],
-    "Fonts": [".ttf", ".otf", ".woff", ".woff2"],
-    "System Files": [".sys", ".dll", ".ini", ".log"],
-    "Miscellaneous": [".iso", ".dmg", ".torrent", ".md", ".epub", ".mobi"]
-}
+# file_formats = {
+#     "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg", ".webp", ".heic", ".ico", ".img"],
+#     "Audio": [".mp3", ".wav", ".aac", ".flac", ".ogg", ".m4a", ".wma"],
+#     "Video": [".mp4", ".avi", ".mkv", ".mov", ".wmv", ".flv", ".webm"],
+#     "Documents": [".txt", ".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".odt", ".ods", ".odp", ".rtf"],
+#     "Compressed Files": [".zip", ".rar", ".tar", ".gz", ".7z", ".bz2", ".xz"],
+#     "Executables": [".exe", ".bat", ".sh", ".msi", ".app"],
+#     "Data Files": [".csv", ".json", ".xml", ".yaml", ".yml", ".sql", ".db", ".mdb", ".sqlite"],
+#     "Web Files": [".html", ".htm", ".css", ".js", ".php", ".asp", ".jsp"],
+#     "Fonts": [".ttf", ".otf", ".woff", ".woff2"],
+#     "System Files": [".sys", ".dll", ".ini", ".log"],
+#     "Miscellaneous": [".iso", ".dmg", ".torrent", ".md", ".epub", ".mobi"]
+# }
 
-folder_creations = {category: False for category in file_formats}
+# folder_creations = {category: False for category in file_formats}
 
-extension_to_category = {}
-for category, extensions in file_formats.items():
-    for extension in extensions:
-        extension_to_category[extension.lower()] = category
+# extension_to_category = {}
+# for category, extensions in file_formats.items():
+#     for extension in extensions:
+#         extension_to_category[extension.lower()] = category
 
-categories = set(file_formats.keys())
+# categories = set(file_formats.keys())
 
-organized_paths = {}
+# organized_paths = {}
 
+# This function gets the file path that we want to organize
 def open_file():
+    #global variable for storing the working directory
     global working_directory, organized_paths
+    #ask for the directory
     fp = fd.askdirectory()
     if fp:
+        #if the directory is not null, set it
         working_directory = fp
+        #basically create the sub-directories to organize into
         for path in file_formats.keys():
             organized_paths[path] = os.path.join(working_directory, path)
 
+
 def scan_directory():
+    
     global working_directory
     if not working_directory:
         messagebox.showerror("Error", "Please select a directory first.")
