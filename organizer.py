@@ -5,42 +5,44 @@ from tkinter import *
 from tkinter import filedialog as fd
 from tkinter import messagebox
 import json
+import re
 
-#working directory stores the path of the directory to organize, i.e: downloads
+# working directory stores the path of the directory to organize, i.e: downloads
 working_directory = ""
-#this stores the dictionary form of the json preference, i.e key-value pairs
+# this stores the dictionary form of the json preference, i.e key-value pairs
 organizer_configuration = {}
-#this is an array of filepaths created based on preferences
+# this is an array of filepaths created based on preferences
 organized_paths = {}
 
-#reads the user configuration for organizer
+# reads the user configuration for organizer
 def get_config():
-    #get the global variable
     global organizer_configuration
-    #open the file for reading
     with open('preferences.json', 'r') as open_file:
-        #store the json contents in a dictionary
         organizer_configuration = json.load(open_file)
 
-#opens the directory to work in and stores its path
+# opens the directory to work in and stores its path
 def open_directory():
-    #get the global variable
     global working_directory
-    #ask for the directory
     fp = fd.askdirectory()
-    #if not null just assign the value to the variable
     if fp:
         working_directory = fp
 
-#create the organized directories
+# create the organized directories
 def create_paths():
-    #get the global variable
     global organized_paths, working_directory, organizer_configuration
-    #loop through and create the file paths
     for category in organizer_configuration.keys():
-        organized_paths.append(os.path.join(working_directory, category))
-    for directory in organized_paths():
-        os.mkdir(directory, mode=0o777, exists_ok=True)
+        organized_paths[category] = os.path.join(working_directory, category)
+    for directory in organized_paths.values():
+        os.makedirs(directory, mode=0o777, exist_ok=True)
 
-    
-    
+# here we move the files to the desired directory
+def move_files():
+    global organized_paths, working_directory, organizer_configuration
+    files = os.listdir(working_directory)
+    for file in files:
+        full_file_name = os.path.join(working_directory, file)
+        file_name, file_extension = os.path.splitext(full_file_name)
+        for category in organizer_configuration.keys():
+            if re.search(organizer_configuration[category], file_name):
+                shutil.move(full_file_name, organized_paths[category])
+                break
