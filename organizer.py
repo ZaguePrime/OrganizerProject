@@ -44,22 +44,29 @@ def open_file():
         for path in file_formats.keys():
             organized_paths[path] = os.path.join(working_directory, path)
 
-
+# This function is basically to check the contents of the selected directory
 def scan_directory():
-    
+    #reference for the directory
     global working_directory
+    #if a directory has not been selected
     if not working_directory:
         messagebox.showerror("Error", "Please select a directory first.")
         return
 
     try:
+        #for each file in the directory
         for item in os.listdir(working_directory):
+            #get its full path
             full_path = os.path.join(working_directory, item)
+            #check if it is an individual file
             if os.path.isfile(full_path):
+                #get the extentions
                 _, ext = os.path.splitext(full_path)
                 print(f"File: {item}, Extension: {ext}")
+            #check if it is a directory
             elif os.path.isdir(full_path) and item not in categories:
                 print(f"File: {item}, Extension: folder")
+            #check if its a category
             elif os.path.isdir(full_path) and item in categories:
                 folder_creations[item] = True
         create_folders()
