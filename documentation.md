@@ -22,13 +22,11 @@
 - IT IS MANDATORY THAT YOU DO NOT REMOVE THESE KEYS AS THEY ARE NEEDED BY THE PROGRAM.
 ```json
 {
+    //START OF IMPORTANT KEYS
     is_regex: , //can be true or false
-    starts_with: ,//can be true or false
-    ends_with: ,//can be true or false
-    contains: ,//can be true or false
     group_extension,//can be true or false
-    //Anything below this line will be custom regex categories
-    //eg:
+    //END OF IMPORTANT KEYS
+    //Cutom categories below this line, eg:
     documents: [aA-zZ]*
 };
 ```
