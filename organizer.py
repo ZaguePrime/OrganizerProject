@@ -21,28 +21,25 @@ def get_config():
         organizer_configuration = json.load(open_file)
 
 # opens the directory to work in and stores its path
+# This works as expected
 def open_directory():
     global working_directory
     fp = fd.askdirectory()
     if fp:
         working_directory = fp
+        print(working_directory)
 
 # create the organized directories
 def create_paths():
+    # Declare necessary files as global
     global organized_paths, working_directory, organizer_configuration
+    # Loop through the json and create paths based on keys
+    #Store the paths in the organized_paths dictionary
     for category in organizer_configuration.keys():
         organized_paths[category] = os.path.join(working_directory, category)
+    
+    # Now for each directory in the paths dictory, create the directory
+    # Ensure that it is readable, writable and executable
     for directory in organized_paths.values():
         os.makedirs(directory, mode=0o777, exist_ok=True)
 
-# here we move the files to the desired directory
-def move_files():
-    global organized_paths, working_directory, organizer_configuration
-    files = os.listdir(working_directory)
-    for file in files:
-        full_file_name = os.path.join(working_directory, file)
-        file_name, file_extension = os.path.splitext(full_file_name)
-        for category in organizer_configuration.keys():
-            if re.search(organizer_configuration[category], file_name):
-                shutil.move(full_file_name, organized_paths[category])
-                break

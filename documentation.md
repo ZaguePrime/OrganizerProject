@@ -24,7 +24,7 @@
 {
     //START OF IMPORTANT KEYS
     is_regex: , //can be true or false
-    group_extension,//can be true or false
+    group_extension: ,//can be true or false
     //END OF IMPORTANT KEYS
     //Cutom categories below this line, eg:
     documents: [aA-zZ]*
