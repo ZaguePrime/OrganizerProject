@@ -43,3 +43,4 @@ def create_paths():
     for directory in organized_paths.values():
         os.makedirs(directory, mode=0o777, exist_ok=True)
 
+

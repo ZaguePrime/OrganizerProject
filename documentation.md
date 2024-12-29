@@ -23,7 +23,7 @@
 ```json
 {
     //START OF IMPORTANT KEYS
-    is_regex: , //can be true or false
+    is_regex: , //can be true or false, if false the the config will just use the contains on a filename
     group_extension: ,//can be true or false
     //END OF IMPORTANT KEYS
     //Cutom categories below this line, eg:
