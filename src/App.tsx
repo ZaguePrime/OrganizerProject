@@ -7,9 +7,9 @@ import AddButton from './components/addButton'
 
 function App() {
   return (
-    <div>
-      <AddButton></AddButton>
-      <PreferencesInput></PreferencesInput>
+    <div className="bg-success">
+      <AddButton/>
+      <PreferencesInput/>
     </div>
   );
 }
