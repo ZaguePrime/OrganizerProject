@@ -1,15 +1,16 @@
 import React from 'react';
 
+interface props {
+    buttonClicked: () => void;
+}
 
-
-const addButton = () => {
+const addButton = ({buttonClicked}: props) => {
     return (
         <div className="d-inline-flex ms-10 bg-primary ms-auto">
-            <button type="button" className="btn btn-outline-info" id="addButton">&#43;</button>
+            <button type="button" className="btn btn-outline-info" id="addButton"
+            onClick={buttonClicked}>&#43;</button>
         </div>
     );
 };
-
-
 
 export default addButton;

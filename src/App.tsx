@@ -6,11 +6,27 @@ import PrefContainer from './components/prefContainer'
 import PreferencesInput from './components/preferencesInput'
 import AddButton from './components/addButton'
 
+interface Preference {
+  id: number; // Define the structure of each preference
+  folderName: string;
+  regexText: string;
+}
+
 function App() {
+
+  const [preferences, setPreferences] = useState<Preference[]>([]);
+
+  const handleAddPreference = () => {
+    setPreferences((prevPreferences) => [
+      ...prevPreferences,
+      { id: prevPreferences.length, folderName: '', regexText: '' },
+    ]);
+  };
+
   return (
     <div className="bg-success">
-      <AddButton/>
-      <PrefContainer/>
+      <AddButton buttonClicked={handleAddPreference}/>
+      <PrefContainer preferences={preferences}/>
     </div>
   );
 }
