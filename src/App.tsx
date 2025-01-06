@@ -5,6 +5,7 @@ import './App.css'
 import PrefContainer from './components/prefContainer'
 import PreferencesInput from './components/preferencesInput'
 import AddButton from './components/addButton'
+import SubtractButton from './components/subtractButton'
 
 interface Preference {
   id: number; // Define the structure of each preference
@@ -23,9 +24,26 @@ function App() {
     ]);
   };
 
+ const handleRemovePreference = () => {
+    setPreferences((prevPreferences) => {
+      const newPreferences = [...prevPreferences];
+      newPreferences.pop();
+      return newPreferences;
+    });
+ };
+
   return (
-    <div className="bg-success">
-      <AddButton buttonClicked={handleAddPreference}/>
+    <div className="">
+      <div className='container bg-secondary'>
+        <div className='row'>
+          <div className="col bg-info text-center">
+            <AddButton buttonClicked={handleAddPreference}/>
+          </div>
+          <div className="col bg-warning text-center">
+            <SubtractButton buttonClicked={handleRemovePreference}/>
+          </div>
+        </div>
+      </div>
       <PrefContainer preferences={preferences}/>
     </div>
   );

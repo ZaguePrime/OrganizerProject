@@ -6,7 +6,7 @@ interface PreferencesContainerProps {
 
 const PreferencesContainer = ({ preferences }: PreferencesContainerProps) => {
   return (
-    <div className="preferences-container">
+    <div className="preferences-container text-center">
       {preferences.map((pref) => (
         <PrefInput key={pref.id} />
       ))}
