@@ -1,14 +1,15 @@
 import React from 'react';
 
 interface props {
-    buttonClicked: () => void;
+    id: number
+    buttonClicked: (id?:number) => void;
 }
 
-const subtractButton = ({buttonClicked}: props) => {
+const subtractButton = ({id, buttonClicked}: props) => {
     return (
         <>
             <button type="button" className="btn btn-outline-info" id="subtractButton"
-            onClick={buttonClicked}>&#x2212;</button>
+            onClick={()=>buttonClicked(id)}>&#x2212;</button>
         </>
     );
 };

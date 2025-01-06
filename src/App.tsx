@@ -24,13 +24,11 @@ function App() {
     ]);
   };
 
- const handleRemovePreference = () => {
-    setPreferences((prevPreferences) => {
-      const newPreferences = [...prevPreferences];
-      newPreferences.pop();
-      return newPreferences;
-    });
- };
+  const handleRemovePreference = (id?: number) => {
+    setPreferences((prevPreferences) =>
+      prevPreferences.filter((pref) => pref.id !== id)
+    );
+  }
 
   return (
     <div className="">
@@ -39,12 +37,9 @@ function App() {
           <div className="col bg-info text-center">
             <AddButton buttonClicked={handleAddPreference}/>
           </div>
-          <div className="col bg-warning text-center">
-            <SubtractButton buttonClicked={handleRemovePreference}/>
-          </div>
         </div>
       </div>
-      <PrefContainer preferences={preferences}/>
+      <PrefContainer preferences={preferences} buttonClicked={handleRemovePreference}/>
     </div>
   );
 }
